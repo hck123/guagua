@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.msg{
+			text-align:center;
+		    height:32px; 
+		    line-height:32px; 
+		    font-weight:bold; 
+		    margin-top:50px;
+		}
+		.main{
+			width: 500px;
+			height: 500px;
+			margin: auto;
+			border:1px solid #000;
+			
+		}
+
+		.b{
+			margin: 100px 100px 100px 100px;
+			width: 300px;
+			height: 300px;
+			position: relative;
+			 margin:100 200 100 200;
+			
+		}
+		 
+		 .a{
+		 	width: 5px;
+		 	height: 5px;
+		 	float: left;
+	 		 cursor: pointer;
+		 }
+	</style>
+		<script type="text/javascript">
+		var moudown = false;
+		function eventDown(d){
+			moudown = true;
+		}
+		function eventMove(d){
+			if(moudown){
+				d.style.opacity = "0";
+			}
+		}
+		function eventUp(d){
+			moudown = false;
+		}
+	(function(_win){
+		
+
+		document.addEventListener("DOMContentLoaded",function(){
+			var b = document.querySelector(".b");
+		 var fg = document.createDocumentFragment();
+		 for(var i=0;i<3600;i++){
+		 	var div = document.createElement("div");
+		 	 div.className = "a";
+		 	div.setAttribute("onmousedown", "eventDown(this)");
+    		div.setAttribute("onmouseup", "eventUp(this)");
+   		    div.setAttribute("onmousemove", "eventMove(this)");
+		 	fg.appendChild(div);
+		 }
+		 b.appendChild(fg);
+
+		 var pic = function(d,img){
+		 	var indexY = 0;
+		 	var indexX = 0;
+		 	for(var v=0;v<d.length;v++){
+		 		 
+		 		if(v%60 == 0){
+		 			indexY++;
+		 			indexX=0;
+		 		}
+		 		d[v].style.background="url("+img+")";
+		 		d[v].style.backgroundPositionX="-"+indexX*5+"px";
+		 		d[v].style.backgroundPositionY="-"+indexY*5+"px";
+		 		indexX++;
+		 	}
+		 }
+		var d = document.querySelectorAll(".a");
+		 var b = document.querySelector(".b");
+		 var imgs = ['p_0.jpg','p_1.jpg'];
+		var num = Math.floor(Math.random()*2);
+		var img = imgs[num];
+		b.style.background = "url("+img+")";
+		b.style.backgroundPosition =  "center";
+		b.style.backgroundRepeat ="no-repeat";
+		pic(d,"007.jpg");
+
+ 
+	  })
+	})(window)
+		
+	</script>
+</head>
+<body>
+	<div class="msg">刮开看看，<a href="javascript:void(0)" onClick="window.location.reload()">再来一次</a></div>
+	<div class="main">
+		<div class="b"></div>
+	<div>
+
+</body>
+</html>
